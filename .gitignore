@@ -1,0 +1,7 @@
+# PhpStorm directory
+.idea/
+
+# non-use folders
+vendor/
+
+composer.lock
