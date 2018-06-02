@@ -1,0 +1,1 @@
+geth --identity "aworkeryes" --datadir "/testnet" init CustomGenesis.json
