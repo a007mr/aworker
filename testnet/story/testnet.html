@@ -1,0 +1,75 @@
+<html>
+<head>
+</head>
+<body>
+
+
+
+    <table border = 1px solid black>
+        <tr><td>Адрес кошелька</td>
+            <td><input type = edit id = "account" size = 60></td>
+            <td>Пароль</td>
+            <td><input type = edit id = "password"></td></tr>
+    </table>
+
+    <table border = 1px solid black>
+        <tr><td>Добавить себе денег</td>
+            <td><input type=edit id="add_money"></td>
+            <td><input type=button value="Добавить" onclick= "add_token()"></td>
+            <td><span id="transact"></span></td></tr>
+    </table>
+
+<script src = "web3.js"></script>
+
+<script>
+
+web3 = new Web3(new Web3.providers.HttpProvider("http://149.154.71.65:8544"));
+
+//alert(web3.eth.accounts[0]);
+//web3.personal.unlockAccount(web3.eth.accounts[0],"ololo",1000);
+
+/*web3.eth.sendTransaction({
+    from: '0x014620e2015460ebc95c40c78c5aab7435f6083d',
+    to: '0x4360232d70E84376E2f7bBf6e71f26649b06E52d',
+    value: '1000000000000000000'
+});*/
+
+
+var address = "0x4e27f6598fE84fDDFE972506D1aC8E22DbF2AC00";
+var abi = [ { "constant": true, "inputs": [ { "name": "id", "type": "uint256" } ], "name": "get_sold_of_winner", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "winnerRate", "outputs": [ { "name": "", "type": "uint8", "value": "50" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "aworkerRate", "outputs": [ { "name": "", "type": "uint8", "value": "10" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_address", "type": "address" } ], "name": "checkUser", "outputs": [ { "name": "", "type": "uint256[]" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "createUser", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "id", "type": "uint256" } ], "name": "get_vacancy_text_by_id", "outputs": [ { "name": "", "type": "string", "value": "\"Ищу людей, кто пойдёт за меня в караул\"" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_id", "type": "uint256" }, { "name": "_addPerson", "type": "address" } ], "name": "recommendCompany", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "id", "type": "uint256" } ], "name": "getArbitres", "outputs": [ { "name": "", "type": "address[]", "value": [ "0x603f7b33ae10b67e0fd5ffd626591a1ffdd88f79", "0x4360232d70e84376e2f7bbf6e71f26649b06e52d" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_reward", "type": "uint256" }, { "name": "_text", "type": "string" } ], "name": "createVacancy", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "aworkerCancelRate", "outputs": [ { "name": "", "type": "uint8", "value": "50" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_aworkerRate", "type": "uint8" }, { "name": "_whoRecommendWinnerRate", "type": "uint8" }, { "name": "_recommendOnInterviewRate", "type": "uint8" }, { "name": "_winnerRate", "type": "uint8" }, { "name": "_goInterviewRate", "type": "uint8" } ], "name": "setRate", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "id", "type": "uint256" }, { "name": "_address", "type": "address" } ], "name": "choose_winner", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "goInterviewRate", "outputs": [ { "name": "", "type": "uint8", "value": "10" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "id", "type": "uint256" } ], "name": "cancel_vacancy", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "uint256" } ], "name": "userList", "outputs": [ { "name": "userAddress", "type": "address", "value": "0xa4b535b14ee90475469e983161d62782e5fcce3a" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_address", "type": "address" }, { "name": "_count", "type": "uint256" } ], "name": "addToken", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "whoRecommendWinnerRate", "outputs": [ { "name": "", "type": "uint8", "value": "20" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "ad", "type": "address" } ], "name": "balance_of", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "ID", "outputs": [ { "name": "", "type": "uint256", "value": "2" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "id", "type": "uint256" }, { "name": "_address", "type": "address" } ], "name": "go_to_interview", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "id", "type": "uint256" } ], "name": "give_reward", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "recommendOnInterviewRate", "outputs": [ { "name": "", "type": "uint8", "value": "10" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "uint256" } ], "name": "IDList", "outputs": [ { "name": "id", "type": "uint256", "value": "0" }, { "name": "owner", "type": "address", "value": "0xa4b535b14ee90475469e983161d62782e5fcce3a" }, { "name": "text", "type": "string", "value": "\"Ищу людей, кто пойдёт за меня в караул\"" }, { "name": "winner", "type": "address", "value": "0x0000000000000000000000000000000000000000" }, { "name": "reward", "type": "uint256", "value": "1000" }, { "name": "completed", "type": "bool", "value": false } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_address", "type": "address" } ], "name": "getCurrentVacancies", "outputs": [ { "name": "", "type": "uint256[]" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "senderCancelRate", "outputs": [ { "name": "", "type": "uint8", "value": "50" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "userID", "outputs": [ { "name": "", "type": "uint256", "value": "5" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" } ];
+
+var contract = web3.eth.contract(abi);
+
+//Дальше работаем с ним как с контрактом
+var company = contract.at(address);
+//document.write(company.get_vacancy_text_by_id(0) + "<br>");
+//document.write(company.IDList.call(0));
+//document.write("<h4>" + company.getArbitres(0)  + "</h4> <br>");
+
+
+
+
+function add_token(){
+    //var id = Number(document.getElementById("vacancy_id").value);
+    //var account = document.getElementById("account").value.toString();
+    //var password = document.getElementById("password").value.toString();
+    var value = Number(document.getElementById("add_money").value);
+    console.log(web3.eth.accounts[0]);
+	console.log(value);
+    web3.personal.unlockAccount("0x4360232d70E84376E2f7bBf6e71f26649b06E52d", "password",10000);
+    var transaction = Contract.addToken(account, value, {from: account, gas: 10000000});
+    var a = document.getElementById("transact");
+    a.innerHTML = web3.eth.accounts[0];
+    web3.eth.getTransaction(transaction);
+
+}
+
+//alert(web3.eth.getBalance(web3.eth.accounts[0]));
+
+
+
+</script>
+</body>
+</html>
+
+

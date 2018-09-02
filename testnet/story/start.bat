@@ -1,0 +1,1 @@
+geth --nodiscover --maxpeers 0 -datadir "/testnet" -port "30303" --identity "testNode" --networkid 11 --rpc --rpcport 8545 --rpccorsdomain "*" --rpcapi "eth,web3,personal,db,net" console
